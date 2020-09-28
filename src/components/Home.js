@@ -9,6 +9,7 @@ export class Home extends Component {
         this.addVectors = this.addVectors.bind(this);
         this.subtractVectors = this.subtractVectors.bind(this);
         this.dotProduct = this.dotProduct.bind(this);
+        this.angleBetween = this.angleBetween.bind(this);
         this.initializeVectors = this.initializeVectors.bind(this);
     }
     initializeVectors(){
@@ -16,7 +17,8 @@ export class Home extends Component {
         let vector2Coords = this.state.vector2input.split(",");
         if(vector1Coords.length !== vector2Coords.length){
             this.setState({
-                vectorResult: "Two vectors must have same number of coordinates(dimension)."
+                vectorResult: "Two vectors must have same number of coordinates(dimension).",
+                error: true
             });
             return false;
         }
@@ -47,8 +49,16 @@ export class Home extends Component {
             return false;
 
         this.setState({
-            vectorResult: this.Vector1.multiply(this.Vector2),
-            error: true
+            vectorResult: this.Vector1.multiply(this.Vector2)
+        });
+    }
+    angleBetween (event) {
+        event.preventDefault();
+        if(!this.initializeVectors()) 
+            return false;
+        let angle = this.Vector1.getAngle(this.Vector2);
+        this.setState({
+            vectorResult: angle + " degrees"
         });
     }
     setVector1 = (e) => {
@@ -75,7 +85,8 @@ export class Home extends Component {
                 </p>
                 <p><button className="btn btn-primary" onClick={this.addVectors}>Add</button>&nbsp;&nbsp;
                 <button className="btn btn-primary" onClick={this.subtractVectors}>Subtract</button>&nbsp;&nbsp;
-                <button className="btn btn-primary" onClick={this.dotProduct}>Multiply</button></p>
+                <button className="btn btn-primary" onClick={this.dotProduct}>Multiply</button>&nbsp;&nbsp;
+                <button className="btn btn-primary" onClick={this.angleBetween}>Get Angle</button></p>
                 <p aria-live="polite">Result: <strong>{this.state.vectorResult}</strong></p>
             </form>
       </div>

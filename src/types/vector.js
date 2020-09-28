@@ -30,11 +30,26 @@ export class Vector {
 
         return dotProduct;
     }
-    get(x) {
-        return this.elements[x];
+    getAngle (vector) {
+        let result = this.multiply(vector) / (this.unit * vector.unit);
+        let radians = Math.acos(result);
+        
+        return Math.round(radians * (180/Math.PI),2);
+    }
+
+    get unit() {
+        let result = 0; 
+        for(let coord of this.elements){
+            result += Math.pow(coord,2);
+        }
+        let unitVector = Math.sqrt(result); 
+        return unitVector;
     }
     get dimension() {
         return this.elements.length;
+    }
+    get(x) {
+        return this.elements[x];
     }
     set(x, value) {
         this.elements[x] = value;
@@ -42,12 +57,11 @@ export class Vector {
  
 }
 Vector.prototype.toString = function () {
-   let i = 97, returnStr = '';
+   let returnStr = '<';
    for (let x = 0; x < this.elements.length; x++) {
-       returnStr += `${this.elements[x]}${String.fromCharCode(i)}${x < this.elements.length - 1 ? "+" : ""}`;
-       i++;
+       returnStr += `${this.elements[x]}${x < this.elements.length - 1 ? "," : ""}`;
    }
-
+   returnStr += '>';
    return returnStr;
 };
  
