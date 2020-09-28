@@ -78,7 +78,7 @@ export class Home extends Component {
       <div>
             <h1>Vector Operations</h1>
             <form>
-                <p>Enter the two vector values seperated by commas:</p>
+                <p>Enter the two vector values seperated by commas(e.g 10,-1,0):</p>
                 <p>
                     <input type="text" value={this.state.vector1input} onChange={this.setVector1} />&nbsp;&nbsp;
                     <input type="text" value={this.state.vector2input} onChange={this.setVector2} />
