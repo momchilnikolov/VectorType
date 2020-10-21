@@ -1,6 +1,6 @@
 ﻿import { VectorIterator } from "./vectorIterator";
 
-export class Vector {
+export class VectorType {
     constructor(vsize, arr) {
         this.elements = [];
 
@@ -9,14 +9,14 @@ export class Vector {
         }
     }
     add(vector) {
-        let newVector = new Vector(vector.dimension, vector);
+        let newVector = new VectorType(vector.dimension, vector);
         for (let x = 0; x < this.dimension; x++) {
             newVector.elements[x] = this.elements[x] + vector.elements[x];
         }
         return newVector;
     }
     subtract(vector) {
-        let newVector = new Vector(vector.dimension, vector);
+        let newVector = new VectorType(vector.dimension, vector);
         for (let x = 0; x < this.dimension; x++) {
             newVector.elements[x] = this.elements[x] - vector.elements[x];
         }
@@ -56,7 +56,7 @@ export class Vector {
     }
  
 }
-Vector.prototype.toString = function () {
+VectorType.prototype.toString = function () {
    let returnStr = '<';
    for (let x = 0; x < this.elements.length; x++) {
        returnStr += `${this.elements[x]}${x < this.elements.length - 1 ? "," : ""}`;
@@ -65,6 +65,6 @@ Vector.prototype.toString = function () {
    return returnStr;
 };
  
-Vector.prototype[Symbol.iterator] = function () {
+VectorType.prototype[Symbol.iterator] = function () {
     return new VectorIterator(this);
 };

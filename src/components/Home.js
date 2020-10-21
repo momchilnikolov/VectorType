@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Vector } from '../types/vector';
+import { VectorType } from '../types/vector';
+ 
+import  { DrawVectors } from './DrawVectors';
 export class Home extends Component {
 
     constructor(props) {
@@ -22,25 +24,37 @@ export class Home extends Component {
             });
             return false;
         }
-        this.Vector1 = new Vector(vector1Coords.length, vector1Coords);
-        this.Vector2 = new Vector(vector2Coords.length, vector2Coords);
+
+        this.Vector1 = new VectorType(vector1Coords.length, vector1Coords);
+        this.Vector2 = new VectorType(vector2Coords.length, vector2Coords);
+        this.setState({
+            FirstVector: this.Vector1,
+            SecondVector: this.Vector2
+        });
         return true; 
     }
     addVectors(event) {
         event.preventDefault(); 
         if(!this.initializeVectors()) 
             return false;
+
+        let vectorResult = this.Vector1.add(this.Vector2);
+
         this.setState({
-            vectorResult: this.Vector1.add(this.Vector2).toString()
+            vectorResult: vectorResult.toString(),
+            VectorSum: vectorResult
         });
+
     }
     subtractVectors(event) {
         event.preventDefault();
         if(!this.initializeVectors()) 
             return false;
 
+        let vectorResult = this.Vector1.subtract(this.Vector2);
         this.setState({
-            vectorResult: this.Vector1.subtract(this.Vector2).toString()
+            vectorResult: vectorResult.toString(),
+            VectorSum: vectorResult
         });
     }
     dotProduct(event) {
@@ -49,7 +63,7 @@ export class Home extends Component {
             return false;
 
         this.setState({
-            vectorResult: this.Vector1.multiply(this.Vector2)
+            vectorResult: "dot product is " + this.Vector1.multiply(this.Vector2)
         });
     }
     angleBetween (event) {
@@ -88,6 +102,10 @@ export class Home extends Component {
                 <button className="btn btn-primary" onClick={this.dotProduct}>Multiply</button>&nbsp;&nbsp;
                 <button className="btn btn-primary" onClick={this.angleBetween}>Get Angle</button></p>
                 <p aria-live="polite">Result: <strong>{this.state.vectorResult}</strong></p>
+                <DrawVectors key={Math.random().toString()} 
+                    FirstVector={this.state.FirstVector} 
+                    SecondVector={this.state.SecondVector}
+                    VectorSum={this.state.VectorSum}></DrawVectors>
             </form>
       </div>
     );
