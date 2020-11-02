@@ -8,3 +8,5 @@ To see run following commands in app dierctory:
 2.npm start
 
 Try some of the operations on your vectors.
+
+Visualization is 3D and interactive.
