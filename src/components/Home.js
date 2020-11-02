@@ -42,7 +42,8 @@ export class Home extends Component {
 
         this.setState({
             vectorResult: vectorResult.toString(),
-            VectorSum: vectorResult
+            VectorSum: vectorResult,
+            Operation: 1
         });
 
     }
@@ -54,7 +55,8 @@ export class Home extends Component {
         let vectorResult = this.Vector1.subtract(this.Vector2);
         this.setState({
             vectorResult: vectorResult.toString(),
-            VectorSum: vectorResult
+            VectorSum: vectorResult,
+            Operation: 2
         });
     }
     dotProduct(event) {
@@ -105,7 +107,7 @@ export class Home extends Component {
                 <DrawVectors key={Math.random().toString()} 
                     FirstVector={this.state.FirstVector} 
                     SecondVector={this.state.SecondVector}
-                    VectorSum={this.state.VectorSum}></DrawVectors>
+                    Operation={this.state.Operation}></DrawVectors>
             </form>
       </div>
     );
