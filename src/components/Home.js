@@ -104,10 +104,15 @@ export class Home extends Component {
                 <button className="btn btn-primary" onClick={this.dotProduct}>Multiply</button>&nbsp;&nbsp;
                 <button className="btn btn-primary" onClick={this.angleBetween}>Get Angle</button></p>
                 <p aria-live="polite">Result: <strong>{this.state.vectorResult}</strong></p>
+                <p style={this.state.vectorResult ? {} : { display: 'none' }}>
+                  <i>The graphic is interactive, you can zoom and rotate perspective.</i>
+                </p>
                 <DrawVectors key={Math.random().toString()} 
                     FirstVector={this.state.FirstVector} 
                     SecondVector={this.state.SecondVector}
-                    Operation={this.state.Operation}></DrawVectors>
+                    Operation={this.state.Operation}>
+
+                </DrawVectors>
             </form>
       </div>
     );

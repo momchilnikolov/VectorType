@@ -47,12 +47,15 @@ export class DrawVectors extends Component {
             var vec2 = this.FirstVector.dimension === 2 ? new THREE.Vector2(...this.SecondVector.elements) 
             : new THREE.Vector3(...this.SecondVector.elements);  
 
+            var origin = this.FirstVector.dimension === 2 ? new THREE.Vector2(0, 0) : new THREE.Vector3(0, 0, 0);
             var vectorSum = this.Operation === 1 ? vec1.add(vec2) : vec1.sub(vec2);
+            points.push(origin.clone());
+            points.push(vectorSum.clone());
             const length = vectorSum.length();
             const hex = 0xffffff;
             vectorSum.normalize();
-            const origin = this.FirstVector.dimension === 2 ? new THREE.Vector2(0, 0) : new THREE.Vector3(0, 0, 0);
-            const arrowHelper = new THREE.ArrowHelper( vectorSum, origin, length, hex , 1, 1);
+
+            const arrowHelper = new THREE.ArrowHelper( vectorSum, origin, length, hex );
             scene.add( arrowHelper );
         }
         var geometry = new THREE.BufferGeometry().setFromPoints(points);
